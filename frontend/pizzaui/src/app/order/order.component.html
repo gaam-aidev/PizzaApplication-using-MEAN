@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="card" *ngFor="let pizzas of pizzaItems">
+        <div class="left">
+            <h4>{{ pizzas.name }}</h4>
+            <p [ngStyle]="pizzas.type | typecolor" class="typebox"></p>
+            <p>{{ pizzas.price | currency:'INR' }}</p>
+        </div>
+        <div class="middle">
+            <p>{{pizzas.description}}</p>
+            <p><b>Ingredients:</b> <span *ngFor="let item of pizzas.ingredients" class="ingredients">{{item.iname}}</span>,</p>
+            <p><b>Toppings:</b><span *ngFor="let item of pizzas.topping" class="toppings">{{item.tname}}</span>,</p>
+        </div>
+        <div class="right">
+            <img src="{{pizzas.image}}" alt="">
+            <button *ngIf="!isItemInCart(pizzas)" (click)="addCart(pizzas)">Add to Cart</button>
+            <button *ngIf="isItemInCart(pizzas)" (click)="removeCart(pizzas)">Remove</button>
+        </div>
+    </div>
+</div>

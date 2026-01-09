@@ -1,0 +1,16 @@
+<div class="container">
+    <p class="pagetag">Pizzaria now give you option to build your own pizza. Customize your pizza by choosing ingredients from the list given below</p>
+    <table class="table table-bordered table-striped">
+        <tbody>
+            <tr *ngFor="let item of ingredients">
+                <td><img src="{{item.image}}" alt="" class="ing_img"></td>
+                <td class="tinfo"><b><span>{{item.tname}}</span>&nbsp;&nbsp;<span>{{item.price | currency: 'INR'}}</span></b></td>
+                <td><input type="checkbox" (click)="handleclick($event, item)">&nbsp;&nbsp;Add</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="bottom">
+        <p>Total Cost: {{total}}</p>
+        <button class="buildp" (click)="finalizeIngredients()">Build Ur Pizza</button>
+    </div>
+</div>

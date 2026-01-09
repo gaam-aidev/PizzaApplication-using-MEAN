@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="left-cart box">
+        <div class="my-cart">
+            My cart
+        </div>
+        <table class="cart-table">
+            <tr *ngFor="let item of mycart" class="shadow">
+                <td><img src="{{item.image}}" alt="pizza-image"></td>
+                <td>
+                    <p [ngStyle]="item.type | typecolor" class="typebox"></p>
+                </td>
+                <td style="display: flex; flex-direction: column; align-items: center;">
+                    <p style="margin-bottom: 0;">{{item.name | titlecase}}</p>
+                    <p>{{ item.price | currency:'INR':true:'2.0' }}</p>
+                </td>
+                <td>
+                    <div class="qty">
+                        <button class="down-btn" (click)="handleqty('down', item)">-</button>
+                        <p>{{item.quantity}}</p>
+                        <button class="up-btn" (click)="handleqty('up', item)">+</button>
+                    </div>
+                </td>
+                <td>
+                    <p>{{ item.price*item.quantity | currency:'INR'}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" *ngIf="totalprice" style="padding: 12px 0;" class="subtotal">
+                    Sub Total: {{totalprice | currency : 'INR'}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="right-total">
+        <div class="total-inner box">
+            <div class="my-total">
+                The total amount of
+            </div>
+            <table class="total-table" *ngIf="totalprice!==0 || ingredientPrize!==0">
+                <tr>
+                    <td>Pizza</td>
+                    <td>{{totalprice | currency : 'INR'}}</td>
+                </tr>
+                <tr>
+                    <td>Ingredients</td>
+                    <td>{{ingredientPrize | currency : 'INR'}}</td>
+                </tr>
+                <tr>
+                <td colspan="6" style="padding: 12px 0;" class="subtotal">
+                    Sub Total: {{(totalprice || 0)+ingredientPrize | currency : 'INR'}}
+                </td>
+            </tr>
+            </table>
+        </div>
+        <div class="btns">
+            <button class="btns pay" (click)="onpay()">Pay</button>
+            <button class="btns clear" (click)="onclear()">Clear</button>
+        </div>
+    </div>
+</div>
