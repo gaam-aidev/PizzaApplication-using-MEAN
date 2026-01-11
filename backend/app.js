@@ -4,11 +4,12 @@ const cors = require('cors');
 const { pizzaRouter } = require('./routes/pizza');
 const { ingredientsRouter } = require('./routes/ingredients');
 const { connectDB } = require('./config/db.config');
+require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
 
-connectDB('mongodb://127.0.0.1:27017/pizzaDB')
+connectDB(process.env.DB_URL)
 .then(() => {
     console.log('Database connected successfully');
 });
